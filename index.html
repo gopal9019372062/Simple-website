@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>College Application Form</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#ffffff;--muted:#6b7280;--accent:#0b74de;--danger:#dc3545}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:#111}
+    .container{max-width:900px;margin:32px auto;padding:20px}
+    .card{background:var(--card);border-radius:12px;padding:24px;box-shadow:0 6px 18px rgba(15,23,42,0.08)}
+    h1{margin:0;font-size:20px}
+    p.lead{color:var(--muted);margin:6px 0 22px}
+    form{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    label{display:block;font-size:13px;margin-bottom:6px}
+    input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px;background:#fcfdff}
+    textarea{min-height:110px;resize:vertical}
+    .full{grid-column:1/-1}
+    .actions{display:flex;gap:12px;align-items:center;justify-content:flex-end;margin-top:10px}
+    button{padding:10px 14px;border-radius:8px;border:0;font-weight:600;cursor:pointer}
+    .btn-primary{background:var(--accent);color:white}
+    .btn-ghost{background:transparent;border:1px solid #e5e7eb}
+    .note{font-size:13px;color:var(--muted)}
+    .file-row{display:flex;gap:10px;align-items:center}
+    .error{color:var(--danger);font-size:13px}
+    @media (max-width:720px){form{grid-template-columns:1fr} .actions{justify-content:stretch}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>College Application Form</h1>
+      <p class="lead">Fill in your details to apply. All * required fields must be completed.</p>
+
+      <form id="appForm" novalidate>
+        <div>
+          <label for="firstName">First name *</label>
+          <input id="firstName" name="firstName" type="text" required placeholder="Alice" />
+          <div class="error" data-for="firstName"></div>
+        </div>
+
+        <div>
+          <label for="lastName">Last name *</label>
+          <input id="lastName" name="lastName" type="text" required placeholder="Johnson" />
+          <div class="error" data-for="lastName"></div>
+        </div>
+
+        <div>
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com" />
+          <div class="error" data-for="email"></div>
+        </div>
+
+        <div>
+          <label for="phone">Phone *</label>
+          <input id="phone" name="phone" type="tel" required placeholder="+91 98765 43210" />
+          <div class="error" data-for="phone"></div>
+        </div>
+
+        <div>
+          <label for="dob">Date of birth *</label>
+          <input id="dob" name="dob" type="date" required />
+          <div class="error" data-for="dob"></div>
+        </div>
+
+        <div>
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender">
+            <option value="">Prefer not to say</option>
+            <option>Female</option>
+            <option>Male</option>
+            <option>Non-binary</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="address">Permanent address *</label>
+          <textarea id="address" name="address" required placeholder="Street, City, State, PIN"></textarea>
+          <div class="error" data-for="address"></div>
+        </div>
+
+        <div>
+          <label for="program">Course applying for *</label>
+          <select id="program" name="program" required>
+            <option value="">Select a programme</option>
+            <option>Bachelor of Science (B.Sc)</option>
+            <option>Bachelor of Arts (B.A)</option>
+            <option>Bachelor of Commerce (B.Com)</option>
+            <option>Bachelor of Engineering (B.E/B.Tech)</option>
+            <option>Master of Science (M.Sc)</option>
+            <option>Master of Arts (M.A)</option>
+          </select>
+          <div class="error" data-for="program"></div>
+        </div>
+
+        <div>
+          <label for="yearOfPassing">Year of passing (last qualification)</label>
+          <input id="yearOfPassing" name="yearOfPassing" type="text" placeholder="e.g., 2024" />
+        </div>
+
+        <div>
+          <label for="percentage">Percentage / GPA</label>
+          <input id="percentage" name="percentage" type="text" placeholder="e.g., 78.5 or 8.2" />
+        </div>
+
+        <div>
+          <label for="transcript">Upload transcript (PDF, max 5MB) *</label>
+          <div class="file-row">
+            <input id="transcript" name="transcript" type="file" accept="application/pdf" required />
+            <span class="note">Accepted: .pdf</span>
+          </div>
+          <div class="error" data-for="transcript"></div>
+        </div>
+
+        <div>
+          <label for="photo">Upload passport photo (JPG/PNG, max 2MB)</label>
+          <input id="photo" name="photo" type="file" accept="image/*" />
+          <div class="error" data-for="photo"></div>
+        </div>
+
+        <div class="full">
+          <label for="statement">Personal statement (optional)</label>
+          <textarea id="statement" name="statement" placeholder="Why do you want to join this programme? 250–500 words recommended"></textarea>
+        </div>
+
+        <div class="full">
+          <label><input id="terms" name="terms" type="checkbox" required /> I confirm that the information provided is correct and I agree to the college's terms. *</label>
+          <div class="error" data-for="terms"></div>
+        </div>
+
+        <div class="full actions">
+          <button type="button" class="btn-ghost" id="resetBtn">Reset</button>
+          <button type="submit" class="btn-primary">Submit application</button>
+        </div>
+      </form>
+
+      <div id="result" style="margin-top:14px;display:none"></div>
+
+    </div>
+  </div>
+
+  <script>
+    // Simple client-side validation and demo submit (no server included)
+    const form = document.getElementById('appForm');
+    const result = document.getElementById('result');
+    const maxTranscriptBytes = 5 * 1024 * 1024; // 5MB
+    const maxPhotoBytes = 2 * 1024 * 1024; // 2MB
+
+    function showError(name, message){
+      const el = document.querySelector('.error[data-for="' + name + '"]');
+      if(el) el.textContent = message || '';
+    }
+    function clearErrors(){
+      document.querySelectorAll('.error').forEach(e=>e.textContent='');
+    }
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      clearErrors();
+      result.style.display = 'none';
+      const data = new FormData(form);
+      let hasError = false;
+
+      // Required text fields
+      ['firstName','lastName','email','phone','dob','address','program','transcript','terms'].forEach(k=>{
+        if(!data.get(k) || (k==='transcript' && data.get(k).name==='')){
+          showError(k, 'This field is required');
+          hasError = true;
+        }
+      });
+
+      // basic email pattern
+      const email = data.get('email') || '';
+      if(email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){
+        showError('email','Enter a valid email'); hasError = true;
+      }
+
+      // phone minimal check
+      const phone = (data.get('phone')||'').trim();
+      if(phone && phone.length < 7){ showError('phone','Enter a valid phone'); hasError = true; }
+
+      // file sizes
+      const transcript = document.getElementById('transcript').files[0];
+      if(transcript){
+        if(transcript.size > maxTranscriptBytes){ showError('transcript','File too large (max 5MB)'); hasError = true; }
+      }
+
+      const photo = document.getElementById('photo').files[0];
+      if(photo && photo.size > maxPhotoBytes){ showError('photo','File too large (max 2MB)'); hasError = true; }
+
+      if(hasError) return;
+
+      // Demo: show a summary (in real app submit to server via fetch or form POST)
+      const summary = {
+        name: (data.get('firstName') + ' ' + data.get('lastName')).trim(),
+        email: data.get('email'),
+        phone: data.get('phone'),
+        program: data.get('program'),
+        dob: data.get('dob')
+      };
+
+      result.style.display = 'block';
+      result.innerHTML = `<div style="padding:12px;border-radius:8px;background:#f3f9ff;border:1px solid #e0f0ff">`+
+        `<strong>Preview — application ready to send</strong><br>`+
+        `Name: ${escapeHtml(summary.name)}<br>`+
+        `Email: ${escapeHtml(summary.email)}<br>`+
+        `Phone: ${escapeHtml(summary.phone)}<br>`+
+        `Programme: ${escapeHtml(summary.program)}<br>`+
+        `Date of birth: ${escapeHtml(summary.dob)}<br><br>`+
+        `<small class="note">This demo does not upload files to a server. Replace the demo submit with a real POST request to your server endpoint.</small>`+
+        `</div>`;
+
+      // Example of how you'd send to a server (commented out)
+      // fetch('/submit-application', { method: 'POST', body: data }).then(r=>r.json()).then(...)
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', ()=>{
+      form.reset(); clearErrors(); result.style.display='none';
+    });
+
+    function escapeHtml(str){
+      if(!str) return '';
+      return str.replace(/[&<>"']/g, s=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[s]));
+    }
+
+  </script>
+</body>
+</html>
